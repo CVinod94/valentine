@@ -45,18 +45,12 @@ button {
 
 #love {
   display: none;
-  animation: fadeIn 1.5s ease-in;
 }
 
 img {
   width: 280px;
   border-radius: 20px;
   margin-top: 20px;
-}
-
-@keyframes fadeIn {
-  from {opacity: 0; transform: scale(0.8);}
-  to {opacity: 1; transform: scale(1);}
 }
 
 /* Floating hearts */
@@ -80,24 +74,24 @@ img {
 <button id="yes" onclick="yes()">YES ❤️</button>
 <button id="no" onmouseover="move()">NO 😜</button>
 
+<br>
+
+<button onclick="playMusic()" style="padding:10px 20px; font-size:16px; border-radius:10px; border:none;">
+Play our song 🎵
+</button>
+
 <div id="love">
   <h1>Love you forever Kiki 💘</h1>
   <p>From today… till lifetime… it’s only you ❤️</p>
   <img src="dudu.gif" alt="Bubu Dudu proposal">
 </div>
 
-<!-- Background music -->
+<!-- Music -->
 <audio id="music" loop>
   <source src="anbe.mp3" type="audio/mpeg">
 </audio>
 
-<br>
-<button onclick="playMusic()" style="padding:10px 20px; font-size:16px; border-radius:10px; border:none;">
-Play our song 🎵
-</button>
-
 <script>
-/* Funny NO button text */
 let noTexts = [
   "Think once 😜",
   "Sure ah Kiki? 😏",
@@ -117,15 +111,12 @@ function move() {
   btn.style.top = Math.random() * (window.innerHeight - 50) + "px";
 }
 
-/* YES button action */
 function yes() {
-  document.body.innerHTML = document.getElementById("love").outerHTML;
   document.getElementById("love").style.display = "block";
   startHearts();
   playMusic();
 }
 
-/* Floating hearts generator */
 function startHearts() {
   setInterval(() => {
     let heart = document.createElement("div");
@@ -142,13 +133,15 @@ function startHearts() {
   }, 300);
 }
 
+function playMusic() {
+  let audio = document.getElementById("music");
+  audio.play().catch(() => {
+    alert("Tap the screen once, then press Play again 🎵");
+  });
+}
+
 /* Start hearts on first page */
 startHearts();
-
-/* Play music */
-function playMusic() {
-  document.getElementById("music").play();
-}
 </script>
 
 </body>
