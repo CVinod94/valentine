@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>For Kiki 💖</title>
+
+<style>
+body {
+  margin: 0;
+  height: 100vh;
+  background: linear-gradient(135deg, #ff758c, #ff7eb3);
+  font-family: Arial, sans-serif;
+  overflow: hidden;
+}
+
+/* Center container for both pages */
+.page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  text-align: center;
+}
+
+h1 {
+  color: white;
+  font-size: 42px;
+  margin-bottom: 15px;
+}
+
+p {
+  color: white;
+  font-size: 20px;
+}
+
+/* Buttons */
+.button-group {
+  display: flex;
+  gap: 20px;
+  margin-top: 20px;
+}
+
+button {
+  padding: 15px 35px;
+  font-size: 22px;
+  border-radius: 30px;
+  border: none;
+  cursor: pointer;
+}
+
+#yes {
+  background: red;
+  color: white;
+}
+
+#no {
+  background: white;
+  color: red;
+  position: relative;
+}
+
+/* Song button */
+.song-btn {
+  margin-top: 25px;
+  padding: 10px 20px;
+  font-size: 16px;
+  border-radius: 10px;
+  border: none;
+}
+
+/* GIF styling */
+#loveGif {
+  width: 300px;
+  border-radius: 20px;
+  margin-top: 25px;
+  display: none;
+}
+
+/* Floating hearts */
+.heart {
+  position: fixed;
+  font-size: 20px;
+  animation: floatUp linear infinite;
+}
+
+@keyframes floatUp {
+  0% { transform: translateY(100vh); opacity: 1; }
+  100% { transform: translateY(-10vh); opacity: 0; }
+}
+
+/* Pop animation */
+.pop {
+  animation: popIn 0.8s ease forwards;
+  transform: scale(0);
+}
+
+@keyframes popIn {
+  to { transform: scale(1); }
+}
+</style>
+</head>
+
+<body>
+
+<!-- First Page -->
+<div id="firstPage" class="page">
+  <h1>Kiki… en Valentine aaga varuviya? 💖</h1>
+
+  <div class="button-group">
+    <button id="yes" onclick="yes()">YES ❤️</button>
+    <button id="no" onmouseover="move()">NO 😜</button>
+  </div>
+
+  <button class="song-btn" onclick="playMusic()">
+    Play our song 🎵
+  </button>
+</div>
+
+<!-- Final Page -->
+<div id="finalPage" class="page" style="display:none;">
+  <h1>Love you forever Kiki 💘</h1>
+  <p>From today… till lifetime… it’s only you ❤️</p>
+  <img id="loveGif" src="dudu.gif" alt="proposal">
+</div>
+
+<!-- Music -->
+<audio id="music" loop>
+  <source src="anbe.mp3" type="audio/mpeg">
+</audio>
+
+<script>
+let noTexts = [
+  "Think once 😜",
+  "Sure ah Kiki? 😏",
+  "Idhu last chance 😁",
+  "Heart break aagum 💔",
+  "Chocolate kudukren 🍫",
+  "Please press YES 🥺"
+];
+
+let count = 0;
+
+function move() {
+  let btn = document.getElementById("no");
+  btn.innerText = noTexts[count % noTexts.length];
+  count++;
+
+  btn.style.position = "absolute";
+  btn.style.left = Math.random() * (window.innerWidth - 100) + "px";
+  btn.style.top = Math.random() * (window.innerHeight - 50) + "px";
+}
+
+function yes() {
+  playMusic();
+
+  document.getElementById("firstPage").style.display = "none";
+  document.getElementById("finalPage").style.display = "flex";
+
+  startHearts();
+
+  setTimeout(() => {
+    let gif = document.getElementById("loveGif");
+    gif.style.display = "block";
+    gif.classList.add("pop");
+  }, 600);
+}
+
+function startHearts() {
+  setInterval(() => {
+    let heart = document.createElement("div");
+    heart.className = "heart";
+    heart.innerHTML = "💖";
+    heart.style.left = Math.random() * 100 + "vw";
+    heart.style.fontSize = (Math.random() * 15 + 15) + "px";
+    heart.style.animationDuration = (Math.random() * 3 + 3) + "s";
+    document.body.appendChild(heart);
+
+    setTimeout(() => heart.remove(), 5000);
+  }, 300);
+}
+
+function playMusic() {
+  let audio = document.getElementById("music");
+  audio.play().catch(() => {});
+}
+
+/* Start hearts on first page */
+startHearts();
+</script>
+
+</body>
+</html>
