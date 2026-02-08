@@ -2,6 +2,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>For Kiki 💖</title>
 
 <style>
@@ -13,7 +14,7 @@ body {
   overflow: hidden;
 }
 
-/* Center container for both pages */
+/* Page center layout */
 .page {
   display: flex;
   flex-direction: column;
@@ -25,7 +26,7 @@ body {
 
 h1 {
   color: white;
-  font-size: 42px;
+  font-size: 40px;
   margin-bottom: 15px;
 }
 
@@ -60,7 +61,6 @@ button {
   position: relative;
 }
 
-/* Song button */
 .song-btn {
   margin-top: 25px;
   padding: 10px 20px;
@@ -71,7 +71,7 @@ button {
 
 /* GIF styling */
 #loveGif {
-  width: 300px;
+  width: 280px;
   border-radius: 20px;
   margin-top: 25px;
   display: none;
@@ -151,6 +151,25 @@ function move() {
   btn.style.top = Math.random() * (window.innerHeight - 50) + "px";
 }
 
+/* Stable hearts system */
+let heartInterval;
+
+function startHearts() {
+  if (heartInterval) return;
+
+  heartInterval = setInterval(() => {
+    let heart = document.createElement("div");
+    heart.className = "heart";
+    heart.innerHTML = "💖";
+    heart.style.left = Math.random() * 100 + "vw";
+    heart.style.fontSize = (Math.random() * 15 + 15) + "px";
+    heart.style.animationDuration = (Math.random() * 3 + 3) + "s";
+    document.body.appendChild(heart);
+
+    setTimeout(() => heart.remove(), 5000);
+  }, 300);
+}
+
 function yes() {
   playMusic();
 
@@ -164,20 +183,6 @@ function yes() {
     gif.style.display = "block";
     gif.classList.add("pop");
   }, 600);
-}
-
-function startHearts() {
-  setInterval(() => {
-    let heart = document.createElement("div");
-    heart.className = "heart";
-    heart.innerHTML = "💖";
-    heart.style.left = Math.random() * 100 + "vw";
-    heart.style.fontSize = (Math.random() * 15 + 15) + "px";
-    heart.style.animationDuration = (Math.random() * 3 + 3) + "s";
-    document.body.appendChild(heart);
-
-    setTimeout(() => heart.remove(), 5000);
-  }, 300);
 }
 
 function playMusic() {
