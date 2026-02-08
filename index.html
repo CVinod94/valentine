@@ -80,13 +80,16 @@ button {
 /* Floating hearts */
 .heart {
   position: fixed;
+  bottom: -20px;
   font-size: 20px;
-  animation: floatUp linear infinite;
+  animation: floatUp linear forwards;
+  z-index: 9999;
+  pointer-events: none;
 }
 
 @keyframes floatUp {
-  0% { transform: translateY(100vh); opacity: 1; }
-  100% { transform: translateY(-10vh); opacity: 0; }
+  0% { transform: translateY(0); opacity: 1; }
+  100% { transform: translateY(-110vh); opacity: 0; }
 }
 
 /* Pop animation */
@@ -154,7 +157,7 @@ function move() {
   btn.style.top = Math.random() * (window.innerHeight - 50) + "px";
 }
 
-/* Stable hearts system */
+/* Hearts system */
 let heartInterval;
 
 function startHearts() {
@@ -169,8 +172,8 @@ function startHearts() {
     heart.style.animationDuration = (Math.random() * 3 + 3) + "s";
     document.body.appendChild(heart);
 
-    setTimeout(() => heart.remove(), 5000);
-  }, 300);
+    setTimeout(() => heart.remove(), 4000);
+  }, 250);
 }
 
 function yes() {
@@ -199,4 +202,3 @@ startHearts();
 
 </body>
 </html>
-
