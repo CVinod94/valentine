@@ -51,7 +51,7 @@ button {
 /* Floating hearts */
 .heart {
   position: fixed;
-  font-size: 20px;
+  font-size: 25px;
   animation: floatUp linear infinite;
 }
 
@@ -59,23 +59,48 @@ button {
   0% { transform: translateY(100vh); opacity: 1; }
   100% { transform: translateY(-10vh); opacity: 0; }
 }
+
+/* GIF pop animation */
+.pop {
+  animation: popIn 1s ease forwards;
+  transform: scale(0);
+}
+
+@keyframes popIn {
+  to {
+    transform: scale(1);
+  }
+}
 </style>
 </head>
 
 <body>
 
-<h1>Kiki… en Valentine aaga varuviya? 💖</h1>
+<!-- First Page -->
+<div id="firstPage">
+  <h1>Kiki… en Valentine aaga varuviya? 💖</h1>
 
-<div class="button-group">
-  <button id="yes" onclick="yes()">YES ❤️</button>
-  <button id="no" onmouseover="move()">NO 😜</button>
+  <div class="button-group">
+    <button id="yes" onclick="yes()">YES ❤️</button>
+    <button id="no" onmouseover="move()">NO 😜</button>
+  </div>
+
+  <br>
+
+  <button onclick="playMusic()" style="padding:10px 20px; font-size:16px; border-radius:10px; border:none;">
+    Play our song 🎵
+  </button>
 </div>
 
-<br>
-
-<button onclick="playMusic()" style="padding:10px 20px; font-size:16px; border-radius:10px; border:none;">
-Play our song 🎵
-</button>
+<!-- Final Page -->
+<div id="finalPage" style="display:none;">
+  <h1>Love you forever Kiki 💘</h1>
+  <p style="font-size:25px; color:white;">
+    today… till lifetime… it’s only you ❤️
+  </p>
+  <img id="loveGif" src="dudu.gif" 
+       style="width:300px; border-radius:20px; margin-top:20px; display:none;">
+</div>
 
 <!-- Background music -->
 <audio id="music" loop>
@@ -107,17 +132,17 @@ function move() {
 function yes() {
   playMusic();
 
-  document.body.innerHTML = `
-    <div style="display:flex; flex-direction:column; align-items:center; justify-content:center; height:100vh; text-align:center;">
-      <h1 style="color:white;">Love you forever Kiki 💘</h1>
-      <p style="color:white; font-size:20px;">
-        From today… till lifetime… it’s only you ❤️
-      </p>
-      <img src="dudu.gif" style="width:300px; border-radius:20px; margin-top:20px;">
-    </div>
-  `;
+  document.getElementById("firstPage").style.display = "none";
+  document.getElementById("finalPage").style.display = "block";
 
   startHearts();
+
+  // Pop-up GIF after small delay
+  setTimeout(() => {
+    let gif = document.getElementById("loveGif");
+    gif.style.display = "block";
+    gif.classList.add("pop");
+  }, 800);
 }
 
 function startHearts() {
