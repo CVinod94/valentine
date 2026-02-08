@@ -87,9 +87,14 @@ img {
 </div>
 
 <!-- Background music -->
-<audio autoplay loop>
-  <source src="anbe.mp3.mp3" type="audio/mpeg">
+<audio id="music" loop>
+  <source src="anbe.mp3" type="audio/mpeg">
 </audio>
+
+<br>
+<button onclick="playMusic()" style="padding:10px 20px; font-size:16px; border-radius:10px; border:none;">
+Play our song 🎵
+</button>
 
 <script>
 /* Funny NO button text */
@@ -140,10 +145,15 @@ function startHearts() {
 
 /* Start hearts on first page */
 startHearts();
+  
+function playMusic() {
+  document.getElementById("music").play();
+}  
 </script>
-
+  
 </body>
 </html>
+
 
 
 
