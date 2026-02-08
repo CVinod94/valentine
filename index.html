@@ -3,145 +3,38 @@
 <head>
 <meta charset="UTF-8">
 <title>For Kiki 💖</title>
-
 <style>
 body {
-  margin: 0;
-  height: 100vh;
-  background: linear-gradient(135deg, #ff758c, #ff7eb3);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-family: Arial, sans-serif;
-  overflow: hidden;
+  background: pink;
   text-align: center;
+  margin-top: 100px;
+  font-family: Arial;
 }
-
-h1 {
-  color: white;
-  font-size: 42px;
-}
-
 button {
-  padding: 15px 35px;
-  font-size: 22px;
-  margin: 15px;
-  border-radius: 30px;
-  border: none;
-  cursor: pointer;
-}
-
-#yes {
-  background: red;
-  color: white;
-}
-
-#no {
-  position: absolute;
-  background: white;
-  color: red;
-}
-
-#love {
-  display: none;
-}
-
-img {
-  width: 280px;
-  border-radius: 20px;
-  margin-top: 20px;
-}
-
-/* Floating hearts */
-.heart {
-  position: fixed;
+  padding: 15px 30px;
   font-size: 20px;
-  animation: floatUp linear infinite;
-}
-
-@keyframes floatUp {
-  0% { transform: translateY(100vh); opacity: 1; }
-  100% { transform: translateY(-10vh); opacity: 0; }
+  border-radius: 20px;
+  border: none;
+  margin: 10px;
 }
 </style>
 </head>
-
 <body>
 
 <h1>Kiki… en Valentine aaga varuviya? 💖</h1>
 
-<button id="yes" onclick="yes()">YES ❤️</button>
-<button id="no" onmouseover="move()">NO 😜</button>
+<button onclick="playMusic()">Play our song 🎵</button>
 
-<br>
+<br><br>
 
-<button onclick="playMusic()" style="padding:10px 20px; font-size:16px; border-radius:10px; border:none;">
-Play our song 🎵
-</button>
-
-<div id="love">
-  <h1>Love you forever Kiki 💘</h1>
-  <p>From today… till lifetime… it’s only you ❤️</p>
-  <img src="dudu.gif" alt="Bubu Dudu proposal">
-</div>
-
-<!-- Music -->
-<audio id="music" loop>
+<audio id="music" controls>
   <source src="anbe.mp3" type="audio/mpeg">
 </audio>
 
 <script>
-let noTexts = [
-  "Think once 😜",
-  "Sure ah Kiki? 😏",
-  "Idhu last chance 😁",
-  "Heart break aagum 💔",
-  "Chocolate kudukren 🍫",
-  "Please press YES 🥺"
-];
-
-let count = 0;
-
-function move() {
-  let btn = document.getElementById("no");
-  btn.innerText = noTexts[count % noTexts.length];
-  count++;
-  btn.style.left = Math.random() * (window.innerWidth - 100) + "px";
-  btn.style.top = Math.random() * (window.innerHeight - 50) + "px";
-}
-
-function yes() {
-  document.getElementById("love").style.display = "block";
-  startHearts();
-  playMusic();
-}
-
-function startHearts() {
-  setInterval(() => {
-    let heart = document.createElement("div");
-    heart.className = "heart";
-    heart.innerHTML = "💖";
-    heart.style.left = Math.random() * 100 + "vw";
-    heart.style.fontSize = (Math.random() * 15 + 15) + "px";
-    heart.style.animationDuration = (Math.random() * 3 + 3) + "s";
-    document.body.appendChild(heart);
-
-    setTimeout(() => {
-      heart.remove();
-    }, 5000);
-  }, 300);
-}
-
 function playMusic() {
-  let audio = document.getElementById("music");
-  audio.play().catch(() => {
-    alert("Tap the screen once, then press Play again 🎵");
-  });
+  document.getElementById("music").play();
 }
-
-/* Start hearts on first page */
-startHearts();
 </script>
 
 </body>
